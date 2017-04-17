@@ -4,6 +4,7 @@ namespace mb_studi.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using EasyEncryption;
 
     internal sealed class Configuration : DbMigrationsConfiguration<mb_studi.Data.DataContext>
     {
@@ -14,18 +15,17 @@ namespace mb_studi.Migrations
 
         protected override void Seed(mb_studi.Data.DataContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var defaultUser = new Models.User()
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john.doe@hotmail.fr",
+                Password = MD5.ComputeMD5Hash("johndoe")
+            };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Users.AddOrUpdate<Models.User>(defaultUser);
+            context.SaveChanges();
         }
     }
 }

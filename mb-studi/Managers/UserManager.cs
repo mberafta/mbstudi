@@ -33,24 +33,6 @@ namespace mb_studi.Managers
                                 result.Add(new UserViewModel(user));
                             }
                         }
-
-                        else
-                        {
-                            var defaultUser = new User()
-                            {
-                                Id = Guid.NewGuid(),
-                                FirstName = "John",
-                                LastName = "Doe",
-                                Email = "john.doe@hotmail.fr",
-                                Password = MD5.ComputeMD5Hash("johndoe")
-                            };
-
-                            db.Users.Add(defaultUser);
-                            db.SaveChanges();
-
-                            result.Add(new UserViewModel(defaultUser));
-                        }
-
                     }
 
                 }
