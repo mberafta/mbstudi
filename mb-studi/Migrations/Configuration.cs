@@ -24,7 +24,9 @@ namespace mb_studi.Migrations
                 Password = MD5.ComputeMD5Hash("johndoe")
             };
 
-            context.Users.AddOrUpdate<Models.User>(defaultUser);
+            if (context.Users.FirstOrDefault(u => u.Email == defaultUser.Email) == null)
+                context.Users.AddOrUpdate<Models.User>(defaultUser);
+
             context.SaveChanges();
         }
     }
