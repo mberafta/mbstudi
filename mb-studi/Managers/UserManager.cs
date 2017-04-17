@@ -41,7 +41,8 @@ namespace mb_studi.Managers
                                 Id = Guid.NewGuid(),
                                 FirstName = "John",
                                 LastName = "Doe",
-                                Email = "john.doe@hotmail.fr"
+                                Email = "john.doe@hotmail.fr",
+                                Password = MD5.ComputeMD5Hash("johndoe")
                             };
 
                             db.Users.Add(defaultUser);
